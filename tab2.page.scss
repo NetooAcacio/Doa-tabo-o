@@ -1,0 +1,33 @@
+ion-content{
+    --ion-background-color:#d0f8dd !important;
+}
+
+ion-header{
+    position: absolute;
+}
+
+ion-toolbar{
+    --ion-background-color: transparent;
+    opacity: 0;
+}
+
+.botao-login{
+    margin-top: 25px;
+    text-align: center;
+    color: #F0F4FA; 
+}
+
+.botaologin{
+    --ion-color-primary:#215AB7;
+}
+
+.subtitulo{
+    margin-top: 40px;
+    text-align: center;
+    span{
+        font-size: 25px;
+        font-weight: normal;
+        color:#000483;
+        font-style: sean slab;
+    }
+}
