@@ -1,0 +1,60 @@
+ion-menu-button {
+  color: var(--ion-color-primary);
+}
+
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-content{
+  --ion-background-color:#d0f8dd !important;
+}
+
+
+.botao-login{
+  margin-top: 25px;
+  text-align: center;
+  color: #F0F4FA; 
+  padding-top: 150px;
+}
+
+.botaologin{
+  --ion-color-primary:#00C2CB;
+  padding-right: 40px;
+}
+
+.subtitulo{
+  margin-top: 40px;
+  text-align: center;
+  span{
+      font-size: 25px;
+      font-weight: normal;
+      color:#000483;
+      font-style: sean slab;
+  }
+}
+
+ion-img{
+  padding-top: 100px;
+}
