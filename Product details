@@ -1,0 +1,109 @@
+//Criando uma página de detalhes do produto.
+
+ionic generate page product-details
+
+//Definir o HTML da Página de Detalhes (product-details.page.html).
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalhes do Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img [src]="product.imgUrl"></ion-img>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ product.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ product.description }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+//Definir o Tipo de Dados e a Lógica na Página de Detalhes (product-details.page.ts)
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
+@Component({
+  selector: 'app-product-details',
+  templateUrl: './product-details.page.html',
+  styleUrls: ['./product-details.page.scss'],
+})
+export class ProductDetailsPage implements OnInit {
+  product: any;
+
+  constructor(private route: ActivatedRoute, private navCtrl: NavController) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params && params.product) {
+        this.product = JSON.parse(params.product);
+      }
+    });
+  }
+}
+
+//Definir o HTML da Página Principal (home.page.html) "creio que essa 'home' seja a página dos produtos!
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of products" (click)="openProductDetails(product)">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="product.imgUrl"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ product.title }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+//Adicionar a Lógica na Página Principal (home.page.ts)
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage {
+  products = [
+    {
+      title: 'Produto 1',
+      description: 'Descrição do Produto 1',
+      imgUrl: 'assets/img/product1.jpg'
+    },
+    {
+      title: 'Produto 2',
+      description: 'Descrição do Produto 2',
+      imgUrl: 'assets/img/product2.jpg'
+    },
+    // Adicione mais produtos conforme necessário
+  ];
+
+  constructor(private navCtrl: NavController) {}
+
+  openProductDetails(product) {
+    this.navCtrl.navigateForward('product-details', {
+      queryParams: {
+        product: JSON.stringify(product)
+      }
+    });
+  }
+}
+
+//Adicionar a Rota para a Página de Detalhes no Arquivo de Rotas (app-routing.module.ts)
+const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
+  { path: 'product-details', loadChildren: () => import('./product-details/product-details.module').then(m => m.ProductDetailsPageModule) },
+];
+
